@@ -188,7 +188,6 @@ export interface Payment {
   id: number;
   user?: (number | null) | User;
   amount?: number | null;
-  paymentMethod?: ('card' | 'upi') | null;
   status?: ('success' | 'failed') | null;
   transactionId?: string | null;
   updatedAt: string;
@@ -224,6 +223,7 @@ export interface Log {
 export interface ApiKey {
   id: number;
   api_key: string;
+  user_id?: string | null;
   user_email: string;
   description?: string | null;
   active?: boolean | null;
@@ -407,7 +407,6 @@ export interface PlansSelect<T extends boolean = true> {
 export interface PaymentsSelect<T extends boolean = true> {
   user?: T;
   amount?: T;
-  paymentMethod?: T;
   status?: T;
   transactionId?: T;
   updatedAt?: T;
@@ -440,6 +439,7 @@ export interface LogsSelect<T extends boolean = true> {
  */
 export interface ApiKeysSelect<T extends boolean = true> {
   api_key?: T;
+  user_id?: T;
   user_email?: T;
   description?: T;
   active?: T;
