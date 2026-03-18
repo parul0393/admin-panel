@@ -37,11 +37,11 @@ const ApiKeys: CollectionConfig = {
       type: 'checkbox',
       defaultValue: true,
     },
-    {
-      name: 'created_at',
-      type: 'date',
-      required: true,
-    },
+    // {
+    //   name: 'created_at',
+    //   type: 'date',
+    //   required: true,
+    // },
   ],
 }
 

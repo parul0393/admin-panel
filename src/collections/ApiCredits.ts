@@ -5,6 +5,12 @@ const ApiCredits: CollectionConfig = {
   admin: {
     useAsTitle: 'user_id',
   },
+  access: {
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  },
   fields: [
     {
       name: 'user_id',

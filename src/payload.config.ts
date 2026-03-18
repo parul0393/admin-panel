@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
 import { Users } from './collections/Users'
-import { Media } from './collections/Media'
+// import { Media } from './collections/Media'
 import { Plans } from './collections/Plans'
 import { Payments } from './collections/Payments'
 import { Waitlist } from './collections/Waitlist'
@@ -15,6 +15,8 @@ import Subscriptions from './collections/Subscriptions'
 import ApiKeys from './collections/ApiKeys'
 import ApiCredits from './collections/ApiCredits'
 import CreditTransactions from './collections/CreditTransactions'
+// import Conversions from './collections/Conversions'
+// import UserPayloadMap from './collections/UserPayloadMap'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -36,6 +38,10 @@ export default buildConfig({
     ApiKeys,
     ApiCredits,
     CreditTransactions,
+    Subscriptions,
+    // Conversions,
+    // UserPayloadMap,
+    // Media,
   ],
   // globals: [SMTP],
   editor: lexicalEditor(),
@@ -43,10 +49,16 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
+  // db: postgresAdapter({
+  //   pool: {
+  //     connectionString: process.env.DATABASE_URL || '',
+  //   },
+  // }),
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
     },
+    // Remove schemaName entirely
   }),
   sharp,
   plugins: [],

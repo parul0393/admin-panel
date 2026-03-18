@@ -75,6 +75,7 @@ export interface Config {
     'api-keys': ApiKey;
     'api-credits': ApiCredit;
     'credit-transactions': CreditTransaction;
+    subscriptions: Subscription;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -90,6 +91,7 @@ export interface Config {
     'api-keys': ApiKeysSelect<false> | ApiKeysSelect<true>;
     'api-credits': ApiCreditsSelect<false> | ApiCreditsSelect<true>;
     'credit-transactions': CreditTransactionsSelect<false> | CreditTransactionsSelect<true>;
+    subscriptions: SubscriptionsSelect<false> | SubscriptionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -186,10 +188,16 @@ export interface Plan {
  */
 export interface Payment {
   id: number;
-  user?: (number | null) | User;
+  user_id?: string | null;
   amount?: number | null;
   status?: ('success' | 'failed') | null;
   transactionId?: string | null;
+  plan_category?: string | null;
+  plan_name?: string | null;
+  plan_id?: string | null;
+  razorpay_order_id?: string | null;
+  razorpay_payment_id?: string | null;
+  razorpay_signature?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -227,7 +235,6 @@ export interface ApiKey {
   user_email: string;
   description?: string | null;
   active?: boolean | null;
-  created_at: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -252,6 +259,29 @@ export interface CreditTransaction {
   credits_added: number;
   price: number;
   date: string;
+  payment_id?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscriptions".
+ */
+export interface Subscription {
+  id: number;
+  user_id?: string | null;
+  planName?: ('web_monthly' | 'api_100' | 'api_500' | 'api_1000' | 'API 100 plan') | null;
+  status?: ('active' | 'expired' | 'cancelled') | null;
+  startDate?: string | null;
+  expiryDate?: string | null;
+  creditsRemaining?: number | null;
+  paymentId?: string | null;
+  plan_category?: string | null;
+  plan_id?: string | null;
+  started_at?: string | null;
+  expires_at?: string | null;
+  credits_total?: number | null;
+  payment_id?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -310,6 +340,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'credit-transactions';
         value: number | CreditTransaction;
+      } | null)
+    | ({
+        relationTo: 'subscriptions';
+        value: number | Subscription;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -405,10 +439,16 @@ export interface PlansSelect<T extends boolean = true> {
  * via the `definition` "payments_select".
  */
 export interface PaymentsSelect<T extends boolean = true> {
-  user?: T;
+  user_id?: T;
   amount?: T;
   status?: T;
   transactionId?: T;
+  plan_category?: T;
+  plan_name?: T;
+  plan_id?: T;
+  razorpay_order_id?: T;
+  razorpay_payment_id?: T;
+  razorpay_signature?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -443,7 +483,6 @@ export interface ApiKeysSelect<T extends boolean = true> {
   user_email?: T;
   description?: T;
   active?: T;
-  created_at?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -466,6 +505,28 @@ export interface CreditTransactionsSelect<T extends boolean = true> {
   credits_added?: T;
   price?: T;
   date?: T;
+  payment_id?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscriptions_select".
+ */
+export interface SubscriptionsSelect<T extends boolean = true> {
+  user_id?: T;
+  planName?: T;
+  status?: T;
+  startDate?: T;
+  expiryDate?: T;
+  creditsRemaining?: T;
+  paymentId?: T;
+  plan_category?: T;
+  plan_id?: T;
+  started_at?: T;
+  expires_at?: T;
+  credits_total?: T;
+  payment_id?: T;
   updatedAt?: T;
   createdAt?: T;
 }
