@@ -1,4 +1,6 @@
-export const Waitlist = {
+import type { CollectionConfig } from 'payload'
+
+export const Waitlist: CollectionConfig = {
   slug: 'waitlist',
   fields: [
     { name: 'email', type: 'email' },

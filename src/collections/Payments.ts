@@ -1,4 +1,6 @@
-export const Payments = {
+import type { CollectionConfig } from 'payload'
+
+export const Payments: CollectionConfig = {
   slug: 'payments',
   fields: [
     {
