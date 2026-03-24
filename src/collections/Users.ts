@@ -30,7 +30,7 @@
 //   ],
 // };
 
-import { CollectionConfig } from 'payload/types';
+import { CollectionConfig } from 'payload';
 
 export const Users: CollectionConfig = {
   slug: 'users',
