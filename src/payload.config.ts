@@ -20,7 +20,7 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  cors: ["http://localhost:5173"],
+  cors: ["https://new-code-png-to-svg-final.vercel.app"],
   admin: {
     user: Users.slug,
     importMap: {
